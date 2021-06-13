@@ -1,0 +1,10 @@
+{
+  "zendServerAPIResponse": "http://www.zend.com/server/api/1.15",
+  "requestData": {
+    "apiKeyName": "admin",
+    "method": "applicationGetStatus"
+  },
+  "responseData": {
+    "applicationsList": []
+  }
+}

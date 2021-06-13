@@ -1,0 +1,11 @@
+{
+  "zendServerAPIResponse": "http://www.zend.com/server/api/1.15",
+  "requestData": {
+    "apiKeyName": "admin",
+    "method": "applicationGetStatus"
+  },
+  "errorData": {
+    "errorCode": "authError",
+    "errorMessage": "The details of the Web API key you used are incorrect. Please verify the Web API key and hash and try again"
+  }
+}

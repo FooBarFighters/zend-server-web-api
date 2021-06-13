@@ -1,0 +1,23 @@
+# Phpstorm
+.idea/*
+
+# Netbeans
+nbproject/*
+
+# log files
+logs/*
+
+# NPM
+node_modules/*
+
+# Composer
+vendor/*
+
+# apple
+.DS_Store
+
+# phpunit cache file
+.phpunit.result.cache
+
+# zend server credentials
+config/zendserver.php

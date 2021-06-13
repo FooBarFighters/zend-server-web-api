@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<rules xmlns="http://www.zend.com/server/monitor-rules/1.0">
+    <rule>
+        <ruleProperties>
+            <rule_type_id>function-slow-exec</rule_type_id>
+            <name><![CDATA[Slow Function Execution]]></name>
+            <description>
+                <![CDATA[Triggered when one of the watched functions runs longer than the specified duration]]></description>
+            <enabled>1</enabled>
+            <url><![CDATA[]]></url>
+        </ruleProperties>
+        <ruleConditions>
+        </ruleConditions>
+        <ruleTriggers>
+            <trigger>
+                <triggerProperties>
+                    <severity>0</severity>
+                </triggerProperties>
+                <triggerConditions>
+                    <condition>
+                        <operation>number-greater-than</operation>
+                        <attribute>exec-time</attribute>
+                        <operand>10000</operand>
+                    </condition>
+                </triggerConditions>
+                <triggerActions>
+                </triggerActions>
+            </trigger>
+            <trigger>
+                <triggerProperties>
+                    <severity>1</severity>
+                </triggerProperties>
+                <triggerConditions>
+                    <condition>
+                        <operation>number-greater-than</operation>
+                        <attribute>exec-time</attribute>
+                        <operand>15000</operand>
+                    </condition>
+                </triggerConditions>
+                <triggerActions>
+                </triggerActions>
+            </trigger>
+        </ruleTriggers>
+    </rule>
+</rules>

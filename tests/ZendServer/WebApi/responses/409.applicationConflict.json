@@ -1,0 +1,11 @@
+{
+  "zendServerAPIResponse": "http://www.zend.com/server/api/1.2",
+  "requestData": {
+    "apiKeyName": "admin",
+    "method": "applicationUpdate"
+  },
+  "errorData": {
+    "errorCode": "applicationConflict",
+    "errorMessage": "An upgrade can only be executed for the same application. You can not upgrade Foo to Bar"
+  }
+}

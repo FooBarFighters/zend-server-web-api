@@ -1,0 +1,215 @@
+{
+  "zendServerAPIResponse": "http://www.zend.com/server/api/1.15",
+  "requestData": {
+    "apiKeyName": "admin",
+    "method": "applicationGetStatus"
+  },
+  "responseData": {
+    "applicationsList": [
+      {
+        "id": "77",
+        "baseUrl": "http:\/\/foo.bar.fighters.local\/",
+        "appName": "FooBarFighters",
+        "userAppName": "FooBarFighters",
+        "installedLocation": "\/usr\/local\/zend\/var\/apps\/https\/foo.bar.fighters.local\/443\/db080418_278",
+        "status": "deployed",
+        "activeTasks": [],
+        "healthCheck": "ok",
+        "isRollbackable": false,
+        "isRedeployable": true,
+        "servers": {
+          "applicationServer": {
+            "2": {
+              "deployedVersion": "db080418",
+              "status": "deployed"
+            },
+            "1": {
+              "deployedVersion": "db080418",
+              "status": "deployed"
+            }
+          }
+        },
+        "deployedVersions": {
+          "deployedVersion": "db080418"
+        },
+        "messageList": [],
+        "creationTime": "2020-01-16T16:27:51+02:00",
+        "creationTimeTimestamp": "1579184871",
+        "lastUsed": "2020-01-16T16:27:51+02:00",
+        "lastUsedTimestamp": "1579184871",
+        "isDefinedApplication": 0,
+        "vhostId": "47",
+        "vhostIds": [
+          "47"
+        ],
+        "isCanAttachVhosts": true,
+        "pendingVersion": false,
+        "pendingVersionData": false
+      },
+      {
+        "id": "70",
+        "baseUrl": "http:\/\/foo.u1\/",
+        "appName": "FooU1",
+        "userAppName": "FooU1",
+        "installedLocation": "\/usr\/local\/zend\/var\/apps\/https\/foo.u1\/443\/slim3.1_647",
+        "status": "deployed",
+        "activeTasks": [],
+        "healthCheck": "ok",
+        "isRollbackable": true,
+        "isRedeployable": true,
+        "servers": {
+          "applicationServer": {
+            "2": {
+              "deployedVersion": "slim3.1",
+              "status": "deployed"
+            },
+            "1": {
+              "deployedVersion": "slim3.1",
+              "status": "deployed"
+            }
+          }
+        },
+        "deployedVersions": {
+          "deployedVersion": "slim3.1",
+          "applicationRollbackVersion": "slim3.0"
+        },
+        "messageList": [],
+        "creationTime": "2021-05-20T12:21:11+02:00",
+        "creationTimeTimestamp": "1621506071",
+        "lastUsed": "2021-05-20T12:21:08+02:00",
+        "lastUsedTimestamp": "1621506068",
+        "isDefinedApplication": 0,
+        "vhostId": "43",
+        "vhostIds": [
+          "43"
+        ],
+        "isCanAttachVhosts": true,
+        "pendingVersion": false,
+        "pendingVersionData": false
+      },
+      {
+        "id": "44",
+        "baseUrl": "http:\/\/foo.u2\/",
+        "appName": "FooU2",
+        "userAppName": "FooU2",
+        "installedLocation": "\/usr\/local\/zend\/var\/apps\/https\/foo.u2\/443\/redis1.5_648",
+        "status": "deployed",
+        "activeTasks": [],
+        "healthCheck": "ok",
+        "isRollbackable": true,
+        "isRedeployable": true,
+        "servers": {
+          "applicationServer": {
+            "2": {
+              "deployedVersion": "redis1.5",
+              "status": "deployed"
+            },
+            "1": {
+              "deployedVersion": "redis1.5",
+              "status": "deployed"
+            }
+          }
+        },
+        "deployedVersions": {
+          "deployedVersion": "redis1.5",
+          "applicationRollbackVersion": "9919c8ffc"
+        },
+        "messageList": [],
+        "creationTime": "2021-05-20T15:43:43+02:00",
+        "creationTimeTimestamp": "1621518223",
+        "lastUsed": "2021-05-20T15:43:37+02:00",
+        "lastUsedTimestamp": "1621518217",
+        "isDefinedApplication": 0,
+        "vhostId": "27",
+        "vhostIds": [
+          "27"
+        ],
+        "isCanAttachVhosts": true,
+        "pendingVersion": false,
+        "pendingVersionData": false
+      },
+      {
+        "id": "71",
+        "baseUrl": "http:\/\/foo.service.local\/",
+        "appName": "Foo as a Bar service",
+        "userAppName": "Foo as a Bar service",
+        "installedLocation": "\/usr\/local\/zend\/var\/apps\/https\/foo.service.local\/443\/9a91def6_312",
+        "status": "deployed",
+        "activeTasks": [],
+        "healthCheck": "ok",
+        "isRollbackable": true,
+        "isRedeployable": true,
+        "servers": {
+          "applicationServer": {
+            "2": {
+              "deployedVersion": "9a91def6",
+              "status": "deployed"
+            },
+            "1": {
+              "deployedVersion": "9a91def6",
+              "status": "deployed"
+            }
+          }
+        },
+        "deployedVersions": {
+          "deployedVersion": "9a91def6",
+          "applicationRollbackVersion": "geheugen2020"
+        },
+        "messageList": [],
+        "creationTime": "2020-02-04T13:46:22+02:00",
+        "creationTimeTimestamp": "1580816782",
+        "lastUsed": "2020-02-04T13:46:12+02:00",
+        "lastUsedTimestamp": "1580816772",
+        "isDefinedApplication": 0,
+        "vhostId": "38",
+        "vhostIds": [
+          "38"
+        ],
+        "isCanAttachVhosts": true,
+        "pendingVersion": false,
+        "pendingVersionData": false
+      },
+      {
+        "id": "86",
+        "baseUrl": "http:\/\/bar.baz.local\/",
+        "appName": "BarBaz",
+        "userAppName": "BarBaz",
+        "installedLocation": "\/usr\/local\/zend\/var\/apps\/https\/bar.baz.local\/443\/1.0.4_380",
+        "status": "deployed",
+        "activeTasks": [],
+        "healthCheck": "ok",
+        "isRollbackable": true,
+        "isRedeployable": true,
+        "servers": {
+          "applicationServer": {
+            "2": {
+              "deployedVersion": "1.0.4",
+              "status": "deployed"
+            },
+            "1": {
+              "deployedVersion": "1.0.4",
+              "status": "deployed"
+            }
+          }
+        },
+        "deployedVersions": {
+          "deployedVersion": "1.0.4",
+          "applicationRollbackVersion": "1.0.3"
+        },
+        "messageList": [],
+        "creationTime": "2020-05-19T11:23:04+02:00",
+        "creationTimeTimestamp": "1589880184",
+        "lastUsed": "2020-05-19T11:22:44+02:00",
+        "lastUsedTimestamp": "1589880164",
+        "isDefinedApplication": 0,
+        "vhostId": "52",
+        "vhostIds": [
+          "52"
+        ],
+        "isCanAttachVhosts": true,
+        "pendingVersion": false,
+        "pendingVersionData": false
+      }
+    ]
+  }
+}

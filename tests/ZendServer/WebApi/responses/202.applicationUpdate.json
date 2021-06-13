@@ -1,0 +1,60 @@
+{
+  "zendServerAPIResponse": "http://www.zend.com/server/api/1.2",
+  "requestData": {
+    "apiKeyName": "admin",
+    "method": "applicationUpdate"
+  },
+  "responseData": {
+    "applicationInfo": {
+      "id": "44",
+      "baseUrl": "http:\/\/foo.u2\/",
+      "appName": "FooU2",
+      "userAppName": "FooU2",
+      "installedLocation": "\/usr\/local\/zend\/var\/apps\/https\/foo.u2\/443\/test_20c4f0_655",
+      "status": "staging",
+      "activeTasks": [],
+      "healthCheck": "ok",
+      "isRollbackable": true,
+      "isRedeployable": false,
+      "servers": {
+        "applicationServer": [
+          {
+            "deployedVersion": "test_da272d",
+            "status": "staging"
+          }
+        ]
+      },
+      "deployedVersions": {
+        "deployedVersion": "test_da272d",
+        "applicationRollbackVersion": "test_da272d"
+      },
+      "messageList": [],
+      "creationTime": "2021-05-25T02:27:43+02:00",
+      "creationTimeTimestamp": "1621902463",
+      "lastUsed": "2021-05-25T02:27:41+02:00",
+      "lastUsedTimestamp": "1621902461",
+      "isDefinedApplication": 0,
+      "vhostId": "27",
+      "vhostIds": [
+        "27"
+      ],
+      "isCanAttachVhosts": false,
+      "pendingVersion": "test_da272d",
+      "pendingVersionData": {
+        "app_version_id": "662",
+        "app_id": "44",
+        "task_descriptor_id": "724",
+        "health_check_path": "",
+        "last_used": "1621902461",
+        "creation_time": "1621902461",
+        "is_stable": "0",
+        "node_id": "1",
+        "version": "test_da272d",
+        "nodes": [
+          "2",
+          "1"
+        ]
+      }
+    }
+  }
+}
