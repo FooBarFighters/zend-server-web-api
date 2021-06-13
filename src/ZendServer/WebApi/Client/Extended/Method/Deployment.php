@@ -4,7 +4,6 @@ namespace FooBarFighters\ZendServer\WebApi\Client\Extended\Method;
 
 use FooBarFighters\ZendServer\WebApi\Model\App;
 use FooBarFighters\ZendServer\WebApi\Model\AppList;
-use RuntimeException;
 
 /**
  *
@@ -39,9 +38,9 @@ trait Deployment
      *
      * @return App|null
      */
-    public function rollback(int $appId): ?App
+    public function rollbackApp(int $appId): ?App
     {
-        return $this->api->applicationRollback($appId)['responseData']['applicationInfo'] ?? null;
+        return self::createApp($this->api->applicationRollback($appId));
     }
 
     /**
@@ -56,18 +55,20 @@ trait Deployment
      */
     public function updateApp(int $appId, string $zipPath, ?bool $ignoreFailures = null, ?array $userParams = null): ?App
     {
-        $appData = $this->api->applicationUpdate(
-            $appId
-            , $zipPath
-            , $ignoreFailures
-            , $userParams
-            )['responseData']['applicationInfo'] ?? null;
+        $data = $this->api->applicationUpdate($appId, $zipPath, $ignoreFailures, $userParams);
+        return self::createApp($data);
+    }
 
-        if($appData){
-            //== return the updated App
-            return App::createFromApi($appData);
-        }
-
-        return null;
+    /**
+     * Create an app model from api data
+     *
+     * @param array $data
+     *
+     * @return App|null
+     */
+    public static function createApp(array $data): ?App
+    {
+        $appData = $data['responseData']['applicationInfo'] ?? null;
+        return empty($appData) ? null : App::createFromApi($appData);
     }
 }
