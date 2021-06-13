@@ -3,6 +3,8 @@
 
 namespace FooBarFighters\ZendServer\WebApi\Model;
 
+use DateTimeImmutable;
+
 /**
  * Zend Server App model
  *
@@ -37,6 +39,11 @@ class App
     private $rollbackVersion;
 
     /**
+     * @var DateTimeImmutable|false
+     */
+    private $timestamp;
+
+    /**
      * App constructor.
      */
     public function __construct(
@@ -45,6 +52,7 @@ class App
         , string $appName
         , ?string $deployedVersion
         , ?string $rollbackVersion
+        , ?string $timestamp
     )
     {
         $this->id = $id;
@@ -52,6 +60,7 @@ class App
         $this->appName = $appName;
         $this->deployedVersion = $deployedVersion;
         $this->rollbackVersion = $rollbackVersion;
+        $this->timestamp = DateTimeImmutable::createFromFormat('Y-m-d\TH:i:sP', $timestamp);
     }
 
     /**
@@ -97,6 +106,22 @@ class App
     }
 
     /**
+     * @return DateTimeImmutable|false
+     */
+    public function getTimestamp()
+    {
+        return $this->timestamp;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTimestampAsString(string $format = 'Y-m-d H:i:s'): ?string
+    {
+        return $this->timestamp ? $this->timestamp->format($format) : null;
+    }
+
+    /**
      * @param array $data
      *
      * @return static
@@ -109,6 +134,7 @@ class App
             , $data['appName']
             , $data['deployedVersions']['deployedVersion']
             , $data['deployedVersions']['applicationRollbackVersion'] ?? null
+            , $data['creationTime']
         );
     }
 }
