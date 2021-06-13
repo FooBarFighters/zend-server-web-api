@@ -2,6 +2,10 @@
 
 namespace FooBarFighters\ZendServer\WebApi\Client\Core\Method;
 
+use FooBarFighters\ZendServer\WebApi\Exception\ApplicationConflictException;
+use FooBarFighters\ZendServer\WebApi\Exception\InvalidParameterException;
+use FooBarFighters\ZendServer\WebApi\Exception\MissingParameterException;
+use FooBarFighters\ZendServer\WebApi\Exception\NoSuchApplicationException;
 use GuzzleHttp\RequestOptions;
 use RuntimeException;
 
@@ -13,48 +17,6 @@ use RuntimeException;
  */
 trait Deployment
 {
-    /**
-     * This method allows you to update an existing application. The package you provide must contain the same
-     * application. Additionally, any new parameters or new values for existing parameters must be provided.
-     * This process is asynchronous, meaning the initial request will wait until the package is uploaded and verified,
-     * and the initial response will show information about the new version being deployed.
-     * However, the staging and activation process will proceed after the response is returned.
-     * You must continue checking the application status using the applicationGetStatus method until the deployment
-     * process is complete.
-     *
-     * @url https://help.zend.com/zend/current/content/the_applicationupdate_method.htm
-     * @version 1.2
-     *
-     * @param int    $appId ZendServer application id
-     * @param string $zipPath
-     *
-     * @throws RuntimeException
-     * @return array
-     */
-    public function applicationUpdate(int $appId, string $zipPath): array
-    {
-        if(($path = realpath($zipPath)) === false){
-            throw new RuntimeException("path doesn't exist: $zipPath");
-        }
-        $parts = explode('/', $zipPath);
-        $fileName = end($parts);
-
-        return $this->request('POST', '/ZendServer/Api/applicationUpdate', [
-            RequestOptions::MULTIPART => [
-                [
-                    'name'     => 'appId',
-                    'contents' => $appId,
-                ],
-                [
-                    'name'     => 'appPackage',
-                    'contents' => fopen($zipPath, 'rb'),
-                    'filename' => $fileName,
-                    'Content-type' => 'application/vnd.zend.applicationpackage'
-                ],
-            ],
-        ]);
-    }
-
     /**
      * Get the list of applications currently deployed (or staged) on the server or the cluster and information about
      * each application. If application IDs are specified, this method will return information about the specified
@@ -79,5 +41,71 @@ trait Deployment
             $options[RequestOptions::QUERY]['direction'] = $direction;
         }
         return $this->request('GET',  '/ZendServer/Api/applicationGetStatus', $options);
+    }
+
+    /**
+     * This method allows you to update an existing application. The package you provide must contain the same
+     * application. Additionally, any new parameters or new values for existing parameters must be provided.
+     * This process is asynchronous, meaning the initial request will wait until the package is uploaded and verified,
+     * and the initial response will show information about the new version being deployed.
+     * However, the staging and activation process will proceed after the response is returned.
+     * You must continue checking the application status using the applicationGetStatus method until the deployment
+     * process is complete.
+     *
+     * @url https://help.zend.com/zend/current/content/the_applicationupdate_method.htm
+     * @version 1.2
+     *
+     * @param int        $appId      Zend Server application id
+     * @param string     $appPackage path to the zip/zpk file that needs to be uploaded
+     * @param bool|null  $ignoreFailures
+     * @param array|null $userParams
+     *
+     * @throws ApplicationConflictException
+     * @throws InvalidParameterException
+     * @throws MissingParameterException
+     * @throws NoSuchApplicationException
+     *
+     * @return array
+     */
+    public function applicationUpdate(int $appId, string $appPackage, ?bool $ignoreFailures = null, ?array $userParams = null): array
+    {
+        if(($path = realpath($appPackage)) === false){
+            throw new RuntimeException("path doesn't exist: $appPackage");
+        }
+        $parts = explode('/', $appPackage);
+        $fileName = end($parts);
+
+        $requestOptions = [
+            RequestOptions::MULTIPART => [
+                [
+                    'name'     => 'appId',
+                    'contents' => $appId,
+                ],
+                [
+                    'name'     => 'appPackage',
+                    'contents' => fopen($appPackage, 'rb'),
+                    'filename' => $fileName,
+                    'Content-type' => 'application/vnd.zend.applicationpackage'
+                ],
+            ],
+        ];
+
+        if($ignoreFailures !== null){
+            $requestOptions[RequestOptions::MULTIPART][] = [
+                'name'     => 'ignoreFailures',
+                'contents' => $ignoreFailures ? 'TRUE' : 'FALSE'
+            ];
+        }
+
+        if(!empty($userParams)){
+            foreach($userParams as $k => $v){
+                $requestOptions[RequestOptions::MULTIPART][] = [
+                    'name'     => "userParams%5B{$k}%5D",
+                    'contents' => $v
+                ];
+            }
+        }
+
+        return $this->request('POST', '/ZendServer/Api/applicationUpdate', $requestOptions);
     }
 }

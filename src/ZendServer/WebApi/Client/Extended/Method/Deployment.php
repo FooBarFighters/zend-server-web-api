@@ -35,22 +35,27 @@ trait Deployment
     /**
      * Update a Zend Server app.
      *
-     * @param int    $appId
-     * @param string $zipPath
+     * @param int        $appId
+     * @param string     $zipPath
+     * @param bool|null  $ignoreFailures
+     * @param array|null $userParams
      *
      * @return App|null
      */
-    public function updateApp(int $appId, string $zipPath): ?App
+    public function updateApp(int $appId, string $zipPath, ?bool $ignoreFailures = null, ?array $userParams = null): ?App
     {
-        //ddd($this->api->applicationUpdate($appId, $zipPath));
-        $appData = $this->api->applicationUpdate($appId, $zipPath)['responseData']['applicationInfo'] ?? null;
+        $appData = $this->api->applicationUpdate(
+            $appId
+            , $zipPath
+            , $ignoreFailures
+            , $userParams
+            )['responseData']['applicationInfo'] ?? null;
 
         if($appData){
             //== return the updated App
             return App::createFromApi($appData);
         }
 
-        //== or throw outofbounds exception?
         return null;
     }
 }
