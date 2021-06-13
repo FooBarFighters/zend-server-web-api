@@ -41,7 +41,7 @@ try{
     $client = ClientFactory::createClient($config);
     
     //== get the raw API data as an associative array
-    $res = $client->getApplicationStatus();
+    $res = $client->applicationGetStatus();
     
     //== do something useful with it
     print_r($res['responseData']);
