@@ -21,13 +21,17 @@ $appList = runExample(static function (bool $useMock): ?AppList {
     <h1>Apps</h1>
     <table>
         <tr>
-            <th>Name</th>
             <th>Id</th>
+            <th>Name</th>
+            <th>Version</th>
+            <th>Updated</th>
         </tr>
         <?php foreach ($appList as $app): ?>
             <tr>
-                <td><?php echo $app->getName(); ?></td>
                 <td><?php echo $app->getId(); ?></td>
+                <td><?php echo $app->getName(); ?></td>
+                <td><?php echo $app->getDeployedVersion(); ?></td>
+                <td><?php echo $app->getTimestampAsString(); ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
