@@ -1,0 +1,45 @@
+{
+  "zendServerAPIResponse": "http://www.zend.com/server/api/1.2",
+  "requestData": {
+    "apiKeyName": "admin",
+    "method": "applicationRollback"
+  },
+  "responseData": {
+    "applicationInfo": {
+      "id": "44",
+      "baseUrl": "http:\/\/foo.u2\/",
+      "appName": "FooU2",
+      "userAppName": "FooU2",
+      "installedLocation": "\/usr\/local\/zend\/var\/apps\/https\/foo.u2\/443\/test_20c4f0_655",
+      "status": "Rollback - rollingBack",
+      "activeTasks": [],
+      "healthCheck": "ok",
+      "isRollbackable": false,
+      "isRedeployable": false,
+      "servers": {
+        "applicationServer": [
+          {
+            "deployedVersion": "test_37642d",
+            "status": "Rollback - rollingBack"
+          }
+        ]
+      },
+      "deployedVersions": {
+        "deployedVersion": "test_37642d"
+      },
+      "messageList": [],
+      "creationTime": "2021-06-13T16:48:27+02:00",
+      "creationTimeTimestamp": "1623595707",
+      "lastUsed": "2021-06-13T16:48:27+02:00",
+      "lastUsedTimestamp": "1623595707",
+      "isDefinedApplication": 0,
+      "vhostId": "27",
+      "vhostIds": [
+        "27"
+      ],
+      "isCanAttachVhosts": false,
+      "pendingVersion": false,
+      "pendingVersionData": false
+    }
+  }
+}

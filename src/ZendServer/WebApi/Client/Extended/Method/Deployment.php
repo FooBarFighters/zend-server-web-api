@@ -17,7 +17,7 @@ use RuntimeException;
 trait Deployment
 {
     /**
-     * Return the list of Apps
+     * Return the list of Apps.
      *
      * @param array|null  $appIds
      * @param string|null $direction ASC|DESC
@@ -30,6 +30,18 @@ trait Deployment
         $apps = $this->api->applicationGetStatus($appIds, $direction)['responseData']['applicationsList'] ?? [];
 
         return new AppList(array_map([App::class, 'createFromApi'], $apps));
+    }
+
+    /**
+     * Rollback an existing application to its previous version.
+     *
+     * @param int $appId
+     *
+     * @return App|null
+     */
+    public function rollback(int $appId): ?App
+    {
+        return $this->api->applicationRollback($appId)['responseData']['applicationInfo'] ?? null;
     }
 
     /**

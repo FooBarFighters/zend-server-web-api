@@ -5,6 +5,7 @@ namespace FooBarFighters\ZendServer\WebApi\Client\Core\Method;
 use FooBarFighters\ZendServer\WebApi\Exception\ApplicationConflictException;
 use FooBarFighters\ZendServer\WebApi\Exception\InvalidParameterException;
 use FooBarFighters\ZendServer\WebApi\Exception\MissingParameterException;
+use FooBarFighters\ZendServer\WebApi\Exception\NoRollbackAvailableException;
 use FooBarFighters\ZendServer\WebApi\Exception\NoSuchApplicationException;
 use GuzzleHttp\RequestOptions;
 use RuntimeException;
@@ -41,6 +42,29 @@ trait Deployment
             $options[RequestOptions::QUERY]['direction'] = $direction;
         }
         return $this->request('GET',  '/ZendServer/Api/applicationGetStatus', $options);
+    }
+
+    /**
+     * Rollback an existing application to its previous version. This process is asynchronous, meaning the initial
+     * request will start the rollback process and the initial response will show information about the application
+     * being rolled back. You must continue checking the application status using the applicationGetStatus method until
+     * the process is complete.
+     *
+     * @link https://help.zend.com/zend/current/content/the_applicationrollback_method.htm
+     *
+     * @param int $appId
+     *
+     * @throws NoRollbackAvailableException
+     * @throws NoSuchApplicationException
+     *
+     * @return array
+     */
+    public function applicationRollback(int $appId): array
+    {
+        return $this->request('POST',  '/ZendServer/Api/applicationRollback', [
+            //== application/x-www-form-urlencoded
+            RequestOptions::FORM_PARAMS => ['appId' => $appId]
+        ]);
     }
 
     /**
