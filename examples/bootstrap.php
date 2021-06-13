@@ -85,7 +85,7 @@ function getGuzzleClient(bool $userLogger = true, ?string $jsonFile = null): Guz
 
     $handlerStack = HandlerStack::create();
     if ($userLogger) {
-        addLogger($handlerStack);
+        addLogger($handlerStack, dirname(__FILE__, 2) . '/logs/request.log');
     }
     return new Guzzle(['handler' => $handlerStack]);
 }
@@ -96,7 +96,7 @@ function getGuzzleClient(bool $userLogger = true, ?string $jsonFile = null): Guz
  * @param HandlerStack $stack
  * @param string       $logFile
  */
-function addLogger(HandlerStack $stack, string $logFile = '../logs/request.log'): void
+function addLogger(HandlerStack $stack, string $logFile): void
 {
     $logger = new Logger('guzzle');
     $handler = new RotatingFileHandler($logFile, 1);
@@ -144,7 +144,7 @@ function reportError(Exception $e, ?string $msg = null, ?array $data = null)
         }
         echo '<pre>' . $e->getTraceAsString() . '</pre>';
         if($data){
-            echo '<div class="data"><pre>' . print_r($data) . '</pre></div>';
+            echo '<div class="data"><pre>' . print_r($data, true) . '</pre></div>';
         }
     echo '</div>';
     error_log((string)$e);
