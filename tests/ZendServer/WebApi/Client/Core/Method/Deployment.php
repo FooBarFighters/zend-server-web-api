@@ -20,7 +20,7 @@ trait Deployment
         $api = $this->getMockApiClient('401.authenticationError.json');
 
         //== trigger the exception
-        $api->getApplicationStatus();
+        $api->applicationGetStatus();
     }
 
     /**
@@ -36,12 +36,12 @@ trait Deployment
     /**
      * Test an emulated response with 5 results.
      */
-    final public function testGetApplicationStatusWithResult(): void
+    final public function testApplicationGetStatus(): void
     {
         echo __FUNCTION__ . PHP_EOL;
 
-        $api = $this->getMockApiClient('200.getApplicationStatus.json');
-        $data = $api->getApplicationStatus();
+        $api = $this->getMockApiClient('200.applicationGetStatus.json');
+        $data = $api->applicationGetStatus();
 
         //== mock response should have an applicationsList with 5 entries
         self::assertISArray($data);

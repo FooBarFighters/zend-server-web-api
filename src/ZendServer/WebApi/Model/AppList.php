@@ -100,7 +100,7 @@ class AppList extends \ArrayObject
 
     /**
      * TODO add sort alphabetically for url
-     * NOTE: sorting by name can be done with the API getApplicationStatus $direction param
+     * NOTE: sorting by name can be done with the API applicationGetStatus $direction param
      */
     public function sort(string $property = 'id'): AppList
     {

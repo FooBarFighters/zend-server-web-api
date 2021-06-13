@@ -16,10 +16,10 @@ final class AppTest extends TestCase
         echo __FUNCTION__ . PHP_EOL;
 
         /** @var Client $api */
-        $api = $this->getMockApiClient('200.getApplicationStatus.json', true);
+        $api = $this->getMockApiClient('200.applicationGetStatus.json', true);
 
         //== grab the raw data from the first app in the result list
-        $appData = $api->getApplicationStatus()['responseData']['applicationsList'][0];
+        $appData = $api->applicationGetStatus()['responseData']['applicationsList'][0];
 
         //== create app model
         $app = App::createFromApi($appData);

@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <?php require '_bootstrap.php'; ?>
-</head>
+<?php require '../bootstrap.php'; ?>
 <body>
 <?php
 
@@ -15,7 +12,7 @@ $app = runExample(static function (bool $useMock): ?App {
     $appName = 'FooU2';
 
     $config = getConfig();
-    $guzzle = getGuzzleClient(!$useMock, $useMock ? '200.getApplicationStatus.json' : null);
+    $guzzle = getGuzzleClient(!$useMock, $useMock ? '200.applicationGetStatus.json' : null);
 
     //== create a Zend Server API client
     $zs = ClientFactory::createExtendedClient($config, $guzzle);

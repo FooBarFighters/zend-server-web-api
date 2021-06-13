@@ -10,7 +10,7 @@ trait Deployment
     {
         echo __FUNCTION__ . PHP_EOL;
 
-        $api = $this->getMockApiClient('200.getApplicationStatus.json', true);
+        $api = $this->getMockApiClient('200.applicationGetStatus.json', true);
 
         self::assertInstanceOf(AppList::class, $api->getApps());
     }

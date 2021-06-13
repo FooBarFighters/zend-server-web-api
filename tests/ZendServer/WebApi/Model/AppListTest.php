@@ -16,7 +16,7 @@ final class AppListTest extends TestCase
         echo __FUNCTION__ . PHP_EOL;
 
         //== get Zend Server facade with a mock client
-        $zs = $this->getMockApiClient('200.getApplicationStatus.json', true);
+        $zs = $this->getMockApiClient('200.applicationGetStatus.json', true);
 
         //== full list of apps
         $apps = $zs->getApps();

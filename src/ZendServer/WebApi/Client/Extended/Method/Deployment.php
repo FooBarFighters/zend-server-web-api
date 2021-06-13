@@ -9,7 +9,7 @@ use RuntimeException;
 /**
  *
  * @method applicationUpdate(int $appId, string $zipPath): array
- * @method getApplicationStatus(array $appIds = null, ?string $direction = null): array
+ * @method applicationGetStatus(array $appIds = null, ?string $direction = null): array
  *
  * Trait Deployment
  * @package FooBarFighters\ZendServer\WebApi\Client\Extended\Method
@@ -27,7 +27,7 @@ trait Deployment
     public function getApps(array $appIds = null, ?string $direction = null): AppList
     {
         /** @var array[]|null $apps */
-        $apps = $this->api->getApplicationStatus($appIds, $direction)['responseData']['applicationsList'] ?? [];
+        $apps = $this->api->applicationGetStatus($appIds, $direction)['responseData']['applicationsList'] ?? [];
 
         return new AppList(array_map([App::class, 'createFromApi'], $apps));
     }

@@ -69,7 +69,7 @@ trait Deployment
      *
      * @return array
      */
-    public function getApplicationStatus(array $appIds = null, ?string $direction = null): array
+    public function applicationGetStatus(array $appIds = null, ?string $direction = null): array
     {
         $options = [];
         if(!empty($appIds)){
