@@ -1,0 +1,16 @@
+{
+  "zendServerAPIResponse": "http://www.zend.com/server/api/1.3",
+  "requestData": {
+    "apiKeyName": "admin",
+    "method": "logsReadLines"
+  },
+  "responseData": {
+    "logFileMetaData": {
+      "lineNumber": 12300916,
+      "fileSize": 2926755888,
+      "lastModified": "2021-06-14T23:51:28+02:00",
+      "lastModifiedTimestamp": 1623707488
+    },
+    "logLines": "[14-Jun-2021 23:46:30 Europe\/Amsterdam] PHP Deprecated:  The each() function is deprecated. This message will be suppressed on further calls in \/usr\/local\/zend\/var\/apps\/https\/fbf.nl\/443\/db080418_278\/library\/Zend\/Cache\/Backend.php on line 65\n[14-Jun-2021 23:50:47 Europe\/Amsterdam] PHP Deprecated:  The each() function is deprecated. This message will be suppressed on further calls in \/usr\/local\/zend\/var\/apps\/https\/fbf.nl\/443\/db080418_278\/library\/Zend\/Cache\/Backend.php on line 65\n[14-Jun-2021 23:51:28 Europe\/Amsterdam] PHP Deprecated:  The each() function is deprecated. This message will be suppressed on further calls in \/usr\/local\/zend\/var\/apps\/https\/fbf.nl\/443\/db080418_278\/library\/Zend\/Cache\/Backend.php on line 65\n"
+  }
+}
