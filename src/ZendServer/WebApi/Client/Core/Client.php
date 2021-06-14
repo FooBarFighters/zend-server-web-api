@@ -4,11 +4,9 @@ namespace FooBarFighters\ZendServer\WebApi\Client\Core;
 
 use FooBarFighters\ZendServer\WebApi\Client\ApiClientInterFace;
 use FooBarFighters\ZendServer\WebApi\Exception\ApiException;
-use FooBarFighters\ZendServer\WebApi\Exception\ApplicationConflictException;
-use FooBarFighters\ZendServer\WebApi\Exception\NoSuchApplicationException;
-use FooBarFighters\ZendServer\WebApi\Exception\NotAuthorizedException;
 use FooBarFighters\ZendServer\WebApi\Client\Core\Method\Deployment;
 use FooBarFighters\ZendServer\WebApi\Client\Core\Method\Monitor;
+use FooBarFighters\ZendServer\WebApi\Client\Core\Method\ServerClusterManagement;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\GuzzleException;
@@ -34,6 +32,7 @@ final class Client implements ApiClientInterFace
     //== use traits to add API methods
     use Deployment;
     use Monitor;
+    use ServerClusterManagement;
 
     /**
      * ZendServer admin > Administration > Web API Keys > Hash
@@ -165,22 +164,16 @@ final class Client implements ApiClientInterFace
         //== re-package API related errors, this includes 500 and 4xx errors
         catch (BadResponseException $e) {
             $data = $this->parseResponse($e->getResponse());
-            switch($e->getCode()) {
-                case 401:
-                    throw new NotAuthorizedException($e->getCode(), $data);
-                    break;
 
-                case 404:
-                    throw new NoSuchApplicationException($e->getCode(), $data);
-                    break;
-
-                case 409:
-                    throw new ApplicationConflictException($e->getCode(), $data);
-                    break;
-
-                default:
-                    throw new ApiException($e->getCode(), $data);
+            if(isset($data['errorData']['errorCode'])){
+                $className = ucfirst($data['errorData']['errorCode']);
+                $qualifiedName = "\FooBarFighters\ZendServer\WebApi\Exception\\{$className}Exception";
+                if(class_exists($qualifiedName)){
+                    throw new $qualifiedName($e->getCode(), $data);
+                }
             }
+
+            throw new ApiException($e->getCode(), $data);
         }
     }
 
