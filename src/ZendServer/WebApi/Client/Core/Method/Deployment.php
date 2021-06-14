@@ -19,6 +19,19 @@ use RuntimeException;
 trait Deployment
 {
     /**
+     * Retrieve package and meta information about a deployed application. This action provides the most complete list
+     * of information about a single application we can provide.
+     *
+     * @param int $appId
+     *
+     * @return array
+     */
+    public function applicationGetDetails(int $appId): array
+    {
+        return $this->request('GET',  '/ZendServer/Api/applicationGetDetails', [RequestOptions::QUERY => ['application' => $appId]]);
+    }
+
+    /**
      * Get the list of applications currently deployed (or staged) on the server or the cluster and information about
      * each application. If application IDs are specified, this method will return information about the specified
      * applications. If no IDs are specified, this method will return information about all applications

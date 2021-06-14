@@ -1,0 +1,131 @@
+{
+  "zendServerAPIResponse": "http://www.zend.com/server/api/1.15",
+  "requestData": {
+    "apiKeyName": "admin",
+    "method": "applicationGetDetails"
+  },
+  "responseData": {
+    "applicationDetails": {
+      "applicationInfo": {
+        "id": "44",
+        "baseUrl": "http:\/\/foo.u2\/",
+        "appName": "FooU2",
+        "userAppName": "FooU2",
+        "installedLocation": "\/usr\/local\/zend\/var\/apps\/https\/foo.u2\/443\/test_20c4f0_655",
+        "status": "deployed",
+        "activeTasks": [],
+        "healthCheck": "ok",
+        "isRollbackable": true,
+        "isRedeployable": true,
+        "servers": {
+          "applicationServer": [
+            {
+              "deployedVersion": "test_ea3853",
+              "status": "deployed"
+            }
+          ]
+        },
+        "deployedVersions": {
+          "deployedVersion": "test_ea3853",
+          "applicationRollbackVersion": "test_da9815"
+        },
+        "messageList": [],
+        "creationTime": "2021-06-14T00:02:08+02:00",
+        "creationTimeTimestamp": "1623621728",
+        "lastUsed": "2021-06-14T00:02:08+02:00",
+        "lastUsedTimestamp": "1623621728",
+        "isDefinedApplication": 0,
+        "vhostId": "27",
+        "vhostIds": [
+          "27"
+        ],
+        "isCanAttachVhosts": false,
+        "pendingVersion": false,
+        "pendingVersionData": false
+      },
+      "applicationPackage": {
+        "prerequisitesValidation": "false",
+        "prerequisites": "",
+        "userParams": []
+      },
+      "servers": {
+        "2": {
+          "NODE_ID": "2",
+          "NODE_NAME": "your.server.name.1",
+          "JTIME": "1612361918.21",
+          "NODE_IP": "xxx.xx.xxx.xx",
+          "STATUS_CODE": "0",
+          "REASON_STRING": "",
+          "IS_DELETED": "0",
+          "LAST_UPDATED": "1623623537",
+          "SERVER_FLAGS": "0",
+          "appId": "44",
+          "status": 32,
+          "status_name": "ACTIVE",
+          "healthStatus": 81,
+          "serverName": "your.server.name.1",
+          "version": "test_ea3853",
+          "deployment_time": "1623621728",
+          "messages": " "
+        },
+        "1": {
+          "NODE_ID": "1",
+          "NODE_NAME": "your.server.name.2",
+          "JTIME": "1623561269.561",
+          "NODE_IP": "xxx.xx.xxx.xx",
+          "STATUS_CODE": "0",
+          "REASON_STRING": "",
+          "IS_DELETED": "0",
+          "LAST_UPDATED": "1623623537",
+          "SERVER_FLAGS": "0",
+          "appId": "44",
+          "status": 32,
+          "status_name": "ACTIVE",
+          "healthStatus": 81,
+          "serverName": "your.server.name.2",
+          "version": "test_ea3853",
+          "deployment_time": "1623621728",
+          "messages": " "
+        }
+      },
+      "vhosts": [
+        {
+          "id": "27",
+          "name": "your.vhost.name.1",
+          "port": "443",
+          "status": "PendingRestart",
+          "default": "0",
+          "zendDefined": true,
+          "zendManaged": true,
+          "ssl": true,
+          "created": "2019-11-19T14:54:18+02:00",
+          "lastUpdated": "2019-11-19T14:54:18+02:00",
+          "createdTimestamp": "1574168058",
+          "lastUpdatedTimestamp": "1574168058",
+          "applicationPool": null,
+          "servers": [
+            {
+              "id": "2",
+              "status": "PendingRestart",
+              "name": "your.server.name.1",
+              "lastMessage": ""
+            },
+            {
+              "id": "1",
+              "status": "PendingRestart",
+              "name": "your.server.name.2",
+              "lastMessage": ""
+            }
+          ]
+        }
+      ],
+      "vhostsAddresses": {
+        "27": {
+          "address": "https:\/\/your.vhost.name.1\/",
+          "id": "27",
+          "status": "ATTACHED"
+        }
+      }
+    }
+  }
+}
