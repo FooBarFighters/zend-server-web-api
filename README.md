@@ -1,7 +1,7 @@
 # Zend Server Web API
 
-A [Guzzle](https://docs.guzzlephp.org/en/stable/) based wrapper for the [Zend Server Web API](https://help.zend.com/zend/current/content/web_api_reference_guide.htm). Has no dependencies with any framework.
-
+A [Guzzle](https://docs.guzzlephp.org/en/stable/) based wrapper for (a part of) the [Zend Server Web API](https://help.zend.com/zend/current/content/web_api_reference_guide.htm). Has no dependencies with any framework.
+Check the traits in ZendServer/WebApi/Client/Core/Method for the endpoints that are currently supported.
 ## Installation
 
 The package can be installed with composer:
