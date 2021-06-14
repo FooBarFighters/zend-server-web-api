@@ -135,6 +135,7 @@ function reportError(Exception $e, ?string $msg = null, ?array $data = null)
     $lines['code'] = "code: {$e->getCode()}";
     $lines['msg'] = "msg: {$e->getMessage()}"; //ddd($lines);
 
+    echo get_class($e);
     echo '<div class="error">';
         if($msg){
             echo '<h3 class="custom-msg">' . $msg . '</h3>';
