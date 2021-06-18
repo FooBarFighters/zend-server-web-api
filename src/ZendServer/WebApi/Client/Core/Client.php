@@ -7,6 +7,7 @@ use FooBarFighters\ZendServer\WebApi\Exception\ApiException;
 use FooBarFighters\ZendServer\WebApi\Client\Core\Method\Deployment;
 use FooBarFighters\ZendServer\WebApi\Client\Core\Method\Monitor;
 use FooBarFighters\ZendServer\WebApi\Client\Core\Method\ServerClusterManagement;
+use FooBarFighters\ZendServer\WebApi\Exception\NotAuthorizedException;
 use GuzzleHttp\Client as Guzzle;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\GuzzleException;
@@ -164,15 +165,28 @@ final class Client implements ApiClientInterFace
         //== re-package API related errors, this includes 500 and 4xx errors
         catch (BadResponseException $e) {
             $data = $this->parseResponse($e->getResponse());
+            $errorCode = $data['errorData']['errorCode'] ?? null;
 
-            if(isset($data['errorData']['errorCode'])){
-                $className = ucfirst($data['errorData']['errorCode']);
-                $qualifiedName = "\FooBarFighters\ZendServer\WebApi\Exception\\{$className}Exception";
-                if(class_exists($qualifiedName)){
-                    throw new $qualifiedName($e->getCode(), $data);
-                }
+            if($errorCode === null){
+                throw new ApiException($e->getCode(), $data);
             }
 
+            switch($errorCode){
+                case 'authError':
+                    throw new NotAuthorizedException($e->getCode(), $data);
+                    break;
+
+                //== use errorCode to dynamically throw a custom Exception
+                default:
+                    $className = ucfirst($data['errorData']['errorCode']);
+                    $qualifiedName = "\FooBarFighters\ZendServer\WebApi\Exception\\{$className}Exception";
+                    if(class_exists($qualifiedName)){
+                        throw new $qualifiedName($e->getCode(), $data);
+                    }
+
+            }
+
+            //== custom error class was not found, throw the default API exception
             throw new ApiException($e->getCode(), $data);
         }
     }
