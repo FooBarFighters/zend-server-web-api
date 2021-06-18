@@ -2,7 +2,7 @@
 
 namespace Tests\ZendServer\WebApi\Client\Extended\Method;
 
-use FooBarFighters\ZendServer\WebApi\Model\AppList;
+use FooBarFighters\ZendServer\WebApi\Repository\AppList;
 
 trait Deployment
 {

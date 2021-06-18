@@ -1,11 +1,13 @@
 <?php
 
-namespace FooBarFighters\ZendServer\WebApi\Model;
+namespace FooBarFighters\ZendServer\WebApi\Repository;
+
+use FooBarFighters\ZendServer\WebApi\Model\App;
 
 /**
  * Class AppList
  *
- * A container for App instances offering the possibility to reduce the selection based on a range of filtering criteria.
+ * Repository for App instances offering the possibility to reduce the selection based on a range of filtering criteria.
  * NOTE: Filtering returns a new instance of AppList containing the result. It doesn't modify the current instance. This
  * allows for branching off a range of sub-results from the same parent.
  *

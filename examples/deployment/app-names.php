@@ -4,7 +4,7 @@
 <?php
 
 use FooBarFighters\ZendServer\WebApi\Client\ClientFactory;
-use FooBarFighters\ZendServer\WebApi\Model\AppList;
+use FooBarFighters\ZendServer\WebApi\Repository\AppList;
 
 $appList = runExample(static function (bool $useMock): ?AppList {
     $client = ClientFactory::createExtendedClient(

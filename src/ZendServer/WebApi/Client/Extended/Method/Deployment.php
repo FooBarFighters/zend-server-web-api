@@ -3,7 +3,7 @@
 namespace FooBarFighters\ZendServer\WebApi\Client\Extended\Method;
 
 use FooBarFighters\ZendServer\WebApi\Model\App;
-use FooBarFighters\ZendServer\WebApi\Model\AppList;
+use FooBarFighters\ZendServer\WebApi\Repository\AppList;
 
 /**
  *
