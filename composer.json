@@ -15,7 +15,10 @@
         }
     ],
     "require": {
+        "ext-dom": "*",
         "ext-json": "*",
+        "ext-libxml": "*",
+        "ext-simplexml": "*",
         "ext-zip": "*",
         "guzzlehttp/guzzle": "^7.3"
     },

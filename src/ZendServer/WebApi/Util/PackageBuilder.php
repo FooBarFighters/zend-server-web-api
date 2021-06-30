@@ -2,6 +2,7 @@
 
 namespace FooBarFighters\ZendServer\WebApi\Util;
 
+use FooBarFighters\ZendServer\WebApi\Model\Package;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RuntimeException;
@@ -20,7 +21,7 @@ class PackageBuilder
      *
      * @return string|null
      */
-    public static function createDummy(string $zsAppName, string $rootDir, string $versionPrefix = '', string $zipName = 'package.zip'): ?string
+    public static function createDummy(string $zsAppName, string $rootDir, string $versionPrefix = '', string $zipName = 'package.zip'): ?Package
     {
         $resourcesDir = dirname(__DIR__, 4) . '/resources/package/dummy';
 
@@ -45,7 +46,11 @@ class PackageBuilder
         file_put_contents($configFile, $xml);
         file_put_contents($phpFile, $php);
 
-        return self::zipDir($resourcesDir, realpath("$rootDir/build") . DIRECTORY_SEPARATOR . $zipName);
+        return new Package(
+            $zsAppName
+            , $version
+            , self::zipDir($resourcesDir, realpath("$rootDir/build") . DIRECTORY_SEPARATOR . $zipName)
+        );
     }
 
     /**
