@@ -5,6 +5,7 @@
 
 use FooBarFighters\ZendServer\WebApi\Client\ClientFactory;
 use FooBarFighters\ZendServer\WebApi\Model\App;
+use FooBarFighters\ZendServer\WebApi\Model\Package;
 use FooBarFighters\ZendServer\WebApi\Util\PackageBuilder;
 
 $app = runExample(static function (bool $useMock): ?App {
@@ -21,7 +22,7 @@ $app = runExample(static function (bool $useMock): ?App {
     if ($app = $zs->getApps()->filterByName($appName)) {
 
         //== create a basic package for testing
-        $zipPath = PackageBuilder::createDummy($appName, ROOT, 'test_');
+        $package = PackageBuilder::createDummy($appName, ROOT, 'test_');
 
         //== in case of a mocked response we need to create a new client
         if ($useMock) {
@@ -30,7 +31,7 @@ $app = runExample(static function (bool $useMock): ?App {
         }
 
         //== deploy package
-        return $zs->updateApp($app->getId(), $zipPath);
+        return $zs->updateApp($app->getId(), $package->getPath(), true, ['foo' => 'bar', 'baz' => 'bal']);
     }
     return null;
 });
@@ -39,7 +40,7 @@ $app = runExample(static function (bool $useMock): ?App {
 <?php if ($app): ?>
     <p>Updated <?php echo $app->getName(); ?> to version <b><?php echo $app->getDeployedVersion(); ?></b></p>
 <?php else: ?>
-    <p>uh oh, something went wrong.</p>
+    <p>Uh oh, something went wrong. Perhaps the app wasn't found.</p>
 <?php endif; ?>
 
 </body>
