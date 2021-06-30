@@ -5,6 +5,7 @@ namespace FooBarFighters\ZendServer\WebApi\Client;
 use FooBarFighters\ZendServer\WebApi\Client\Core\Client;
 use FooBarFighters\ZendServer\WebApi\Client\Extended\Client as ExtendedClient;
 use GuzzleHttp\Client as Guzzle;
+use GuzzleHttp\RequestOptions;
 
 class ClientFactory
 {
@@ -16,7 +17,9 @@ class ClientFactory
      */
     public static function createClient(array $config, ?Guzzle $guzzle = null): Client
     {
-        $guzzle = $guzzle ?: new Guzzle();
+        $guzzle = $guzzle ?: new Guzzle([
+            RequestOptions:: CONNECT_TIMEOUT => 3
+        ]);
         return new Client(
             $config['baseUrl'] ?? 'https://your.zend.server.url'
             , $config['hash'] ?? ''
