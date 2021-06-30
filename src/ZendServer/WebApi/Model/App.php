@@ -11,7 +11,7 @@ use DateTimeImmutable;
  * Class App
  * @package FooBarFighters\ZendServer\Model
  */
-class App
+class App implements \JsonSerializable
 {
     /**
      * @var int
@@ -64,6 +64,14 @@ class App
     }
 
     /**
+     * @return string
+     */
+    public function getDeployedVersion(): string
+    {
+        return $this->deployedVersion;
+    }
+
+    /**
      * App identifier
      *
      * @return int
@@ -76,25 +84,9 @@ class App
     /**
      * @return string
      */
-    public function getUrl(): string
-    {
-        return $this->baseUrl;
-    }
-
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->appName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDeployedVersion(): string
-    {
-        return $this->deployedVersion;
     }
 
     /**
@@ -122,6 +114,24 @@ class App
     }
 
     /**
+     * @return string
+     */
+    public function getUrl(): string
+    {
+        return $this->baseUrl;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'version' => $this->getDeployedVersion(),
+            'updated' => $this->getTimestampAsString(),
+        ];
+    }
+
+    /**
      * @param array $data
      *
      * @return static
@@ -136,5 +146,10 @@ class App
             , $data['deployedVersions']['applicationRollbackVersion'] ?? null
             , $data['creationTime']
         );
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 }
