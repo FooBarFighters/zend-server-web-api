@@ -1,6 +1,5 @@
 <?php
 
-
 namespace FooBarFighters\ZendServer\WebApi\Util;
 
 use RecursiveDirectoryIterator;
@@ -23,7 +22,7 @@ class PackageBuilder
      */
     public static function createDummy(string $zsAppName, string $rootDir, string $versionPrefix = '', string $zipName = 'package.zip'): ?string
     {
-        $resourcesDir = dirname(__DIR__, 4) . '/resources';
+        $resourcesDir = dirname(__DIR__, 4) . '/resources/package/dummy';
 
         //== create a random version
         $version = $versionPrefix . substr(uniqid(null, false), -6);
