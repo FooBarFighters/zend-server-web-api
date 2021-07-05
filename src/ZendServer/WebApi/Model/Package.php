@@ -61,6 +61,25 @@ class Package
     }
 
     /**
+     * @param string $format
+     *
+     * @return false|float|int
+     */
+    public function getFileSize(string $format = 'kb')
+    {
+        $numBytes = filesize($this->path);
+        switch ($format){
+            case 'bytes':
+                return $numBytes;
+            case 'kb':
+                return $numBytes/1024;
+            case 'mb':
+                return $numBytes/(1024 * 1024);
+        }
+        return $numBytes;
+    }
+
+    /**
      * @return string
      */
     public function getPath(): string
