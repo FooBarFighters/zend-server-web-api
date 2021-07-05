@@ -21,7 +21,7 @@ class PackageBuilder
      *
      * @return string|null
      */
-    public static function createDummy(string $zsAppName, string $rootDir, string $versionPrefix = '', string $zipName = 'package.zip'): ?Package
+    public static function createDummy(string $zsAppName, string $rootDir, string $versionPrefix = '', string $zipName = 'package.zip'): Package
     {
         $resourcesDir = dirname(__DIR__, 4) . '/resources/package/dummy';
 
