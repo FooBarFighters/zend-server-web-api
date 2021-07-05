@@ -31,7 +31,7 @@ $app = runExample(static function (bool $useMock): ?App {
         }
 
         //== deploy package
-        return $zs->updateApp($app->getId(), $package->getPath(), true, ['foo' => 'bar', 'baz' => 'bal']);
+        return $zs->updateApp($app->getId(), $package->getFilePath(), true, ['foo' => 'bar', 'baz' => 'bal']);
     }
     return null;
 });

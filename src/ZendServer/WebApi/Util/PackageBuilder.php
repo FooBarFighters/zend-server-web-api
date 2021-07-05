@@ -2,6 +2,7 @@
 
 namespace FooBarFighters\ZendServer\WebApi\Util;
 
+use FooBarFighters\ZendServer\WebApi\Model\App;
 use FooBarFighters\ZendServer\WebApi\Model\Package;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -14,14 +15,14 @@ class PackageBuilder
     /**
      * Create a dummy package for testing purposes.
      *
-     * @param string $zsAppName
+     * @param string $appName
      * @param string $rootDir
      * @param string $versionPrefix
      * @param string $zipName
      *
-     * @return string|null
+     * @return Package
      */
-    public static function createDummy(string $zsAppName, string $rootDir, string $versionPrefix = '', string $zipName = 'package.zip'): Package
+    public static function createDummy(string $appName, string $rootDir, string $versionPrefix = '', string $zipName = 'package.zip'): Package
     {
         $resourcesDir = dirname(__DIR__, 4) . '/resources/package/dummy';
 
@@ -35,7 +36,7 @@ class PackageBuilder
                 '/<release>(.*)<\/release>/',
             ],
             [
-                "<name>$zsAppName</name>",
+                "<name>$appName</name>",
                 "<release>$version</release>"
             ],
             file_get_contents($configFile)
@@ -47,8 +48,7 @@ class PackageBuilder
         file_put_contents($phpFile, $php);
 
         return new Package(
-            $zsAppName
-            , $version
+            new App(null, $appName, $version)
             , self::zipDir($resourcesDir, realpath("$rootDir/build") . DIRECTORY_SEPARATOR . $zipName)
         );
     }

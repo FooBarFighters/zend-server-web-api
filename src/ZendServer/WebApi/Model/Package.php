@@ -11,19 +11,14 @@ use SimpleXMLElement;
 class Package
 {
     /**
-     * @var string
+     * @var App
+     */
+    private $app;
+
+    /**
+     * @var string|null
      */
     private $fileName;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $version;
 
     /**
      * @var string
@@ -33,22 +28,35 @@ class Package
     /**
      * Package constructor.
      */
-    public function __construct(string $name, string $version, string $path)
+    public function __construct(App $app, string $path)
     {
-        $this->name = $name;
-        $this->version = $version;
+        $this->app = $app;
         $this->path = $path;
     }
 
     /**
+     * Get the app definition in the package.
+     *
+     * @return App
+     */
+    public function getApp(): App
+    {
+        return $this->app;
+    }
+
+    /**
+     * Get the name of the app in the package.
+     *
      * @return string
      */
     public function getAppName(): string
     {
-        return $this->name;
+        return $this->app->getName();
     }
 
     /**
+     * Get the name of the package file.
+     *
      * @return string
      */
     public function getFileName(): string
@@ -61,6 +69,18 @@ class Package
     }
 
     /**
+     * Get the (local) path of the package file.
+     *
+     * @return string
+     */
+    public function getFilePath(): string
+    {
+        return $this->path;
+    }
+
+    /**
+     * Get the size of the package file.
+     *
      * @param string $format
      *
      * @return false|float|int
@@ -80,19 +100,13 @@ class Package
     }
 
     /**
+     * Get the release version of the app.
+     *
      * @return string
      */
-    public function getPath(): string
+    public function getReleaseVersion(): string
     {
-        return $this->path;
-    }
-
-    /**
-     * @return string
-     */
-    public function getVersion(): string
-    {
-        return $this->version;
+        return $this->app->getDeployedVersion();
     }
 
     /**
@@ -139,11 +153,9 @@ class Package
     public static function createFromArchive(string $zipPath): self
     {
         $descriptor = self::getDescriptor($zipPath);
-
         return new self(
-            (string)$descriptor->name,
-            (string)$descriptor->version->release,
-            $zipPath
+            new App(null, (string)$descriptor->name, (string)$descriptor->version->release)
+            , $zipPath
         );
     }
 }
