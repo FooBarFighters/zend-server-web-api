@@ -14,24 +14,29 @@ use DateTimeImmutable;
 class App implements \JsonSerializable
 {
     /**
-     * @var int
-     */
-    private $id;
-
-    /**
-     * @var string
-     */
-    private $baseUrl;
-
-    /**
-     * @var string
+     * @var string|null
      */
     private $appName;
 
     /**
      * @var string|null
      */
+    private $baseUrl;
+
+    /**
+     * @var string|null
+     */
     private $deployedVersion;
+
+    /**
+     * @var string|null
+     */
+    private $env;
+
+    /**
+     * @var int|null
+     */
+    private $id;
 
     /**
      * @var string|null
@@ -47,12 +52,12 @@ class App implements \JsonSerializable
      * App constructor.
      */
     public function __construct(
-        int $id
-        , string $baseUrl
-        , string $appName
-        , ?string $deployedVersion
-        , ?string $rollbackVersion
-        , ?string $timestamp
+        ?int $id = null
+        , ?string $appName = null
+        , ?string $deployedVersion = null
+        , ?string $rollbackVersion = null
+        , ?string $timestamp = null
+        , ?string $baseUrl = null
     )
     {
         $this->id = $id;
@@ -69,6 +74,14 @@ class App implements \JsonSerializable
     public function getDeployedVersion(): string
     {
         return $this->deployedVersion;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEnv(): ?string
+    {
+        return $this->env;
     }
 
     /**
@@ -127,7 +140,9 @@ class App implements \JsonSerializable
             'id' => $this->getId(),
             'name' => $this->getName(),
             'version' => $this->getDeployedVersion(),
+            'rollback' => $this->getRollbackVersion(),
             'updated' => $this->getTimestampAsString(),
+            'url' => $this->getUrl(),
         ];
     }
 
@@ -140,12 +155,23 @@ class App implements \JsonSerializable
     {
         return new self(
             (int)$data['id']
-            , $data['baseUrl']
             , $data['appName']
             , $data['deployedVersions']['deployedVersion']
             , $data['deployedVersions']['applicationRollbackVersion'] ?? null
             , $data['creationTime']
+            , $data['baseUrl']
         );
+    }
+
+    /**
+     * @param string $env
+     *
+     * @return App
+     */
+    public function setEnv(string $env): self
+    {
+        $this->env = $env;
+        return $this;
     }
 
     public function jsonSerialize()
